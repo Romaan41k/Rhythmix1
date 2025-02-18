@@ -1,7 +1,7 @@
 package rom41k.Rhythmix.controller;
 
-import rom41k.Rhythmix.models.ArtistSubscription;
-import rom41k.Rhythmix.service.ArtistSubscriptionService;
+import rom41k.Rhythmix.database.entity.ArtistSubscription;
+import rom41k.Rhythmix.service.interfaces.ArtistSubscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package rom41k.Rhythmix.controller;
 
-import rom41k.Rhythmix.models.User;
-import rom41k.Rhythmix.service.UserService;
+import rom41k.Rhythmix.database.entity.User;
+import rom41k.Rhythmix.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

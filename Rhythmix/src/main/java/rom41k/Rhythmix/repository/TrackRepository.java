@@ -1,6 +1,6 @@
 package rom41k.Rhythmix.repository;
 
-import rom41k.Rhythmix.models.Track;
+import rom41k.Rhythmix.database.entity.Track;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

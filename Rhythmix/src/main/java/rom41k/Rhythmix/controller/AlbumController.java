@@ -1,7 +1,7 @@
 package rom41k.Rhythmix.controller;
 
-import rom41k.Rhythmix.models.Album;
-import rom41k.Rhythmix.service.AlbumService;
+import rom41k.Rhythmix.database.entity.Album;
+import rom41k.Rhythmix.service.interfaces.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

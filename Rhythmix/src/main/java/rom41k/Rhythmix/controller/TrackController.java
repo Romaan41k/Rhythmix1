@@ -1,7 +1,7 @@
 package rom41k.Rhythmix.controller;
 
-import rom41k.Rhythmix.models.Track;
-import rom41k.Rhythmix.service.TrackService;
+import rom41k.Rhythmix.database.entity.Track;
+import rom41k.Rhythmix.service.interfaces.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

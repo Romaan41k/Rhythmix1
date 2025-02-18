@@ -1,6 +1,6 @@
 package rom41k.Rhythmix.repository;
 
-import rom41k.Rhythmix.models.TrackLike;
+import rom41k.Rhythmix.database.entity.TrackLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TrackLikeRepository extends JpaRepository<TrackLike, Long> {

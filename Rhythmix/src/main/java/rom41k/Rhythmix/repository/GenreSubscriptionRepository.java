@@ -1,6 +1,6 @@
 package rom41k.Rhythmix.repository;
 
-import rom41k.Rhythmix.models.GenreSubscription;
+import rom41k.Rhythmix.database.entity.GenreSubscription;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
