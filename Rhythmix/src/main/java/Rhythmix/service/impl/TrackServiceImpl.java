@@ -1,5 +1,6 @@
 package rom41k.Rhythmix.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import rom41k.Rhythmix.database.entity.Track;
 import rom41k.Rhythmix.repository.TrackRepository;
 import rom41k.Rhythmix.service.interfaces.TrackService;
@@ -10,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TrackServiceImpl implements TrackService {
 
-    @Autowired
-    private TrackRepository trackRepository;
+    private final TrackRepository trackRepository;
 
     @Override
     public Track uploadTrack(Track track) {

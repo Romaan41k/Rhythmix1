@@ -1,5 +1,6 @@
 package rom41k.Rhythmix.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import rom41k.Rhythmix.database.entity.TrackLike;
 import rom41k.Rhythmix.repository.TrackLikeRepository;
 import rom41k.Rhythmix.service.interfaces.TrackLikeService;
@@ -7,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class TrackLikeServiceImpl implements TrackLikeService {
 
-    @Autowired
-    private TrackLikeRepository trackLikeRepository;
+    private final TrackLikeRepository trackLikeRepository;
 
     @Override
     public TrackLike likeTrack(TrackLike trackLike) {

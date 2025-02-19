@@ -1,5 +1,6 @@
 package rom41k.Rhythmix.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import rom41k.Rhythmix.database.entity.Playlist;
 import rom41k.Rhythmix.repository.PlaylistRepository;
 import rom41k.Rhythmix.service.interfaces.PlaylistService;
@@ -10,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class PlaylistServiceImpl implements PlaylistService {
 
-    @Autowired
-    private PlaylistRepository playlistRepository;
+    private final PlaylistRepository playlistRepository;
 
     @Override
     public Playlist createPlaylist(Playlist playlist) {

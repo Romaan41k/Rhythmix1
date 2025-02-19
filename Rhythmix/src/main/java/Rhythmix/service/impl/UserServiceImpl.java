@@ -1,5 +1,6 @@
 package rom41k.Rhythmix.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import rom41k.Rhythmix.database.entity.User;
 import rom41k.Rhythmix.repository.UserRepository;
 import rom41k.Rhythmix.service.interfaces.UserService;
@@ -9,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public User registerUser(User user) {
