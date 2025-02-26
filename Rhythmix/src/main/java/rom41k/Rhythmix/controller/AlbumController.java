@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/albums")
-public class AlbumController {
+public class    AlbumController {
 
     @Autowired
     private AlbumService albumService;

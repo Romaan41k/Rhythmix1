@@ -13,3 +13,18 @@ spring:
     properties:
       hibernate:
         format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rhythmix.official.webapp@gmail.com
+    password: ujer fkgv kfmj cwxq
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+security:
+  jwt:
+    secret-key: qwforwpepipwqewkufcowgilcfliwnrfiugio149y9432y7kibcfi
+    expiration-time: 3600000
+
+spring.config.import: optional:file:.env[.properties]
