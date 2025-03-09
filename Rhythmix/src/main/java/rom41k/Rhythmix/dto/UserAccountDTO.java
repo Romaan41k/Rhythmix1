@@ -3,7 +3,8 @@ package rom41k.Rhythmix.dto;
 import lombok.Data;
 
 @Data
-public class LoginUserDto {
+public class UserAccountDTO {
     private String email;
-    private String password;
+    private String role;
+    private boolean enabled;
 }

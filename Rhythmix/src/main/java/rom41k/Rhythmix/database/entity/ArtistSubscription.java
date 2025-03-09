@@ -14,7 +14,7 @@ public class ArtistSubscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserAccount user;
 
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)

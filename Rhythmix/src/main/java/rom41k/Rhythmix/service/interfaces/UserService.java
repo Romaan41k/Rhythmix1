@@ -9,7 +9,6 @@ public interface UserService {
     List<User> allUsers();
     Optional<User> getUserById(Long id);
     User updateUser(Long id, User updatedUser);
-    void updatePassword(Long id, String newPassword);
-    void deleteUser(Long id);
+    void loadPlaylistsAndTracks(Long userId);
+    Optional<User> getUserByEmail(String email);
 }
-

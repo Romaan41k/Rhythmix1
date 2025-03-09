@@ -14,7 +14,7 @@ public class GenreSubscription {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserAccount user;
 
     @Column(nullable = false)
     private String genre;

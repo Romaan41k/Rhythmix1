@@ -14,7 +14,7 @@ public class TrackLike {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private UserAccount user;
 
     @ManyToOne
     @JoinColumn(name = "track_id", nullable = false)
