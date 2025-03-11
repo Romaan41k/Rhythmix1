@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import rom41k.Rhythmix.database.entity.User;
 import rom41k.Rhythmix.dto.UserDTO;
 import rom41k.Rhythmix.service.interfaces.UserService;
+import rom41k.Rhythmix.util.UserMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,14 +24,14 @@ public class UserController {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
-                .map(user -> ResponseEntity.ok(convertToDto(user)))
+                .map(user -> ResponseEntity.ok(UserMapper.convertToDto(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/")
+    @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> allUsers() {
         List<UserDTO> users = userService.allUsers().stream()
-                .map(this::convertToDto)
+                .map(UserMapper::convertToDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(users);
@@ -49,25 +50,6 @@ public class UserController {
 
         userService.loadPlaylistsAndTracks(user.getId());
 
-        return ResponseEntity.ok(convertToDto(user));
-    }
-
-    private UserDTO convertToDto(User user) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setName(user.getName());
-        userDTO.setEmail(user.getAccount().getEmail());
-        userDTO.setRole(user.getAccount().getRole().name());
-
-        List<String> playlists = user.getPlaylists().stream()
-                .map(playlist -> playlist.getName())
-                .collect(Collectors.toList());
-        userDTO.setPlaylists(playlists);
-
-        List<String> tracks = user.getTracks().stream()
-                .map(track -> track.getTitle())
-                .collect(Collectors.toList());
-        userDTO.setTracks(tracks);
-
-        return userDTO;
+        return ResponseEntity.ok(UserMapper.convertToDto(user));
     }
 }

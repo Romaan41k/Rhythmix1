@@ -30,10 +30,7 @@ public class UserAccountController {
         UserAccount account = userAccountService.getAccountByEmail(email)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        UserAccountDTO accountDTO = new UserAccountDTO();
-        accountDTO.setEmail(account.getEmail());
-        accountDTO.setRole(account.getRole().name());
-        accountDTO.setEnabled(account.isEnabled());
+        UserAccountDTO accountDTO = new UserAccountDTO(account.getEmail(), account.getRole().name(), account.isEnabled());
 
         return ResponseEntity.ok(accountDTO);
     }

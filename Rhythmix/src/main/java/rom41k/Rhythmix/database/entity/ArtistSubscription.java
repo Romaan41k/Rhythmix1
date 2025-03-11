@@ -23,4 +23,3 @@ public class ArtistSubscription {
     @Column(nullable = false, updatable = false)
     private LocalDateTime subscribedAt = LocalDateTime.now();
 }
-

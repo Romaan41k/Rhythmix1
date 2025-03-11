@@ -2,6 +2,7 @@ package rom41k.Rhythmix.service;
 
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,26 +33,27 @@ public class AuthenticationService {
     private final EmailService emailService;
     private final UserRepository userRepository;
 
-    private static final String EMAIL_TEMPLATE_PATH = "src/main/resources/templates/verification-email-template.html";
+    @Value("${email.template-path}")
+    private String emailTemplatePath;
 
     public UserAccount signup(RegisterUserDto input) {
-        if (userAccountRepository.findByEmail(input.getEmail()).isPresent()) {
+        if (userAccountRepository.findByEmail(input.email()).isPresent()) {
             throw new RuntimeException("Email already in use");
         }
 
         UserAccount userAccount = new UserAccount();
-        userAccount.setEmail(input.getEmail());
-        userAccount.setPassword(passwordEncoder.encode(input.getPassword()));
+        userAccount.setEmail(input.email());
+        userAccount.setPassword(passwordEncoder.encode(input.password()));
         userAccount.setCreatedAt(LocalDateTime.now());
         userAccount.setEnabled(false);
         userAccount.setVerificationCode(generateVerificationCode());
         userAccount.setVerificationCodeExpiresAt(LocalDateTime.now().plusMinutes(15));
-        userAccount.setRole(Role.valueOf(input.getRole()));
+        userAccount.setRole(Role.valueOf(input.role()));
 
         userAccountRepository.save(userAccount);
 
         User user = new User();
-        user.setName(input.getUsername());
+        user.setName(input.username());
         user.setAccount(userAccount);
         userRepository.save(user);
 
@@ -61,7 +63,7 @@ public class AuthenticationService {
     }
 
     public UserAccount authenticate(LoginUserDto input) {
-        UserAccount userAccount = userAccountRepository.findByEmail(input.getEmail())
+        UserAccount userAccount = userAccountRepository.findByEmail(input.email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!userAccount.isEnabled()) {
@@ -69,20 +71,20 @@ public class AuthenticationService {
         }
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword())
+                new UsernamePasswordAuthenticationToken(input.email(), input.password())
         );
 
         return userAccount;
     }
 
     public void verifyUser(VerifyUserDto input) {
-        UserAccount userAccount = userAccountRepository.findByEmail(input.getEmail())
+        UserAccount userAccount = userAccountRepository.findByEmail(input.email())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (userAccount.getVerificationCodeExpiresAt().isBefore(LocalDateTime.now())) {
             throw new RuntimeException("Verification code has expired");
         }
-        if (!userAccount.getVerificationCode().equals(input.getVerificationCode())) {
+        if (!userAccount.getVerificationCode().equals(input.verificationCode())) {
             throw new RuntimeException("Invalid verification code");
         }
 
@@ -119,7 +121,7 @@ public class AuthenticationService {
 
     private String readEmailTemplate() {
         try {
-            Path path = Path.of(EMAIL_TEMPLATE_PATH);
+            Path path = Path.of(emailTemplatePath);
             return Files.readString(path);
         } catch (IOException e) {
             throw new RuntimeException("Error reading email template file", e);

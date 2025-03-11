@@ -3,13 +3,12 @@ package rom41k.Rhythmix.database.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import rom41k.Rhythmix.config.RoleAuthorityProvider;
 import rom41k.Rhythmix.database.enums.Role;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @Entity
@@ -46,7 +45,7 @@ public class UserAccount implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return RoleAuthorityProvider.getAuthorities(role);
     }
 
     @Override

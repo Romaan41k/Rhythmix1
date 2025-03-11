@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/rhythmix
+    url: jdbc:postgresql://localhost:5432/1
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -21,10 +21,22 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-
 security:
   jwt:
     secret-key: qwforwpepipwqewkufcowgilcfliwnrfiugio149y9432y7kibcfi
     expiration-time: 3600000
-
+cors:
+  allowed-origins:
+    - https://app-backend.com
+    - http://localhost:8080
+logging:
+  level:
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+app:
+  user:
+    enabled-default: false
+    verification-code-expiration-minutes: 15
 spring.config.import: optional:file:.env[.properties]
+email:
+  template-path: "src/main/resources/templates/verification-email-template.html"
