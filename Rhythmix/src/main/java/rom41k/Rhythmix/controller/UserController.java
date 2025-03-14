@@ -16,22 +16,24 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         return userService.getUserById(id)
-                .map(user -> ResponseEntity.ok(UserMapper.convertToDto(user)))
+                .map(user -> ResponseEntity.ok(userMapper.convertToDto(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<UserDTO>> allUsers() {
         List<UserDTO> users = userService.allUsers().stream()
-                .map(UserMapper::convertToDto)
+                .map(userMapper::convertToDto)
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(users);
@@ -50,6 +52,6 @@ public class UserController {
 
         userService.loadPlaylistsAndTracks(user.getId());
 
-        return ResponseEntity.ok(UserMapper.convertToDto(user));
+        return ResponseEntity.ok(userMapper.convertToDto(user));
     }
 }
